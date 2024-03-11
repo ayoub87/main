@@ -20,54 +20,56 @@ function populateLanguages() {
 
 populateLanguages();
 
-async function ensureDirectoryExists(directory) {
+function speechToText() {
   try {
-    const response = await fetch(directory, { method: "HEAD" });
-    if (!response.ok) {
-      await fetch(directory, { method: "MKCOL" });
-    }
-  } catch (error) {
-    console.error("Failed to ensure directory exists:", error);
-  }
-}
-
-async function fetchAndDisplayTextFiles() {
-  const directory = 'download/text to speech -youbie-/'; // Directory path
-  try {
-    await ensureDirectoryExists('download');
-    await ensureDirectoryExists(directory);
-    const response = await fetch(directory);
-    if (!response.ok) {
-      throw new Error('Failed to fetch directory listing');
-    }
-    const files = await response.json();
-    const fileListElement = document.querySelector('.file-list');
-    fileListElement.innerHTML = ''; // Clear previous list
-    
-    files.forEach(file => {
-      const listItem = document.createElement('li');
-      const link = document.createElement('a');
-      link.textContent = file.name;
-      link.href = '#';
-      link.addEventListener('click', async () => {
-        const fileResponse = await fetch(directory + file.name);
-        if (!fileResponse.ok) {
-          throw new Error(`Failed to fetch file ${file.name}`);
+    recognition = new SpeechRecognition();
+    recognition.lang = inputLanguage.value;
+    recognition.interimResults = true;
+    recordBtn.classList.add("recording");
+    recordBtn.querySelector("p").innerHTML = "Listening...";
+    recognition.start();
+    recognition.onresult = (event) => {
+      const speechResult = event.results[0][0].transcript;
+      //detect when intrim results
+      if (event.results[0].isFinal) {
+        result.innerHTML += " " + speechResult;
+        result.querySelector("p").remove();
+      } else {
+        //creative p with class interim if not already there
+        if (!document.querySelector(".interim")) {
+          const interim = document.createElement("p");
+          interim.classList.add("interim");
+          result.appendChild(interim);
         }
-        const text = await fileResponse.text();
-        displayTextContent(text);
-      });
-      listItem.appendChild(link);
-      fileListElement.appendChild(listItem);
-    });
+        //update the interim p with the speech result
+        document.querySelector(".interim").innerHTML = " " + speechResult;
+      }
+      downloadBtn.disabled = false;
+    };
+    recognition.onspeechend = () => {
+      speechToText();
+    };
+    recognition.onerror = (event) => {
+      stopRecording();
+      if (event.error === "no-speech") {
+        alert("No speech was detected. Stopping...");
+      } else if (event.error === "audio-capture") {
+        alert(
+          "No microphone was found. Ensure that a microphone is installed."
+        );
+      } else if (event.error === "not-allowed") {
+        alert("Permission to use microphone is blocked.");
+      } else if (event.error === "aborted") {
+        alert("Listening Stopped.");
+      } else {
+        alert("Error occurred in recognition: " + event.error);
+      }
+    };
   } catch (error) {
-    console.error(error);
-  }
-}
+    recording = false;
 
-function displayTextContent(text) {
-  const contentElement = document.querySelector('.text-content');
-  contentElement.textContent = text;
+    console.log(error);
+  }
 }
 
 recordBtn.addEventListener("click", () => {
@@ -108,5 +110,3 @@ clearBtn.addEventListener("click", () => {
   result.innerHTML = "";
   downloadBtn.disabled = true;
 });
-
-fetchAndDisplayTextFiles();
