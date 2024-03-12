@@ -89,13 +89,17 @@ function stopRecording() {
 }
 
 function download() {
+  const lesson = document.getElementById("lesson").value;
+  const module = document.getElementById("module").value;
   const text = result.innerText;
-  const filename = "speech.txt";
+  const now = new Date();
+  const filename = lesson + '/' + module + '.txt';
+  const content = `Lesson: ${lesson}\nModule: ${module}\nDate: ${now.toISOString()}\n\n${text}`;
 
   const element = document.createElement("a");
   element.setAttribute(
     "href",
-    "data:text/plain;charset=utf-8," + encodeURIComponent(text)
+    "data:text/plain;charset=utf-8," + encodeURIComponent(content)
   );
   element.setAttribute("download", filename);
   element.style.display = "none";
