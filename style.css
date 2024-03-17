@@ -113,3 +113,46 @@ body {
   display: flex;
   gap: 20px;
 }
+
+/* style.css */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-image: linear-gradient(to right, #00b4db, #0083b0);
+  padding: 10px 20px;
+  color: white;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.gradient-text {
+  background-image: linear-gradient(to right, #ff4e50, #f9d423);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.tabs {
+  display: flex;
+}
+
+.tab {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  margin-right: 10px;
+  font-size: 16px;
+  color: white;
+}
+
+.tab:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
