@@ -1,73 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Speech to Text</title>
-  </head>
-  <body>
-    <div class="container">
-      <p class="heading">Speech to Text - For Haroun yaakoubi</p>
-      <div class="options">
-  <div class="language">
-    <p>Language</p>
-    <select name="input-language" id="language"></select>
-  </div>
-  <div class="youtube-link">
-    <p>YouTube Video Link</p>
-    <input type="text" id="youtubeInput" placeholder="Paste YouTube video link here" />
-    <button class="btn" id="youtubeConvertBtn">Convert</button>
-  </div>
-</div>
-
-      
-      <div class="line"></div>
-      <button class="btn record">
-        <div class="icon">
-          <ion-icon name="mic-outline"></ion-icon>
-          <img src="bars.svg" alt="" />
-        </div>
-        <p>Start Listening</p>
-      </button>
-      <p class="heading">Result :</p>
-      <div
-        class="result"
-        spellcheck="false"
-        placeholder="Text will be shown here"
-      >
-        <p class="interim"></p>
-      </div>
-      <div class="buttons">
-        <button class="btn clear">
-          <ion-icon name="trash-outline"></ion-icon>
-          <p>Clear</p>
-        </button>
-        <button class="btn download" disabled>
-          <ion-icon name="cloud-download-outline"></ion-icon>
-          <p>Download</p>
-        </button>
-            </div>
-      <p>Developed By Youbie</p></p>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speech to Text</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <span class="gradient-text">Youbie</span>
     </div>
-    
+    <div class="tabs">
+      <button id="textToSpeechTab" class="tab">Text to Speech</button>
+      <button id="speechToTextTab" class="tab">Speech to Text</button>
+      <button id="youtubeToTextTab" class="tab">YouTube to Text</button>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="wrapper">
+      <header>Text To Speech</header>
+      <form action="#">
+        <div class="row">
+          <label>Enter Text</label>
+          <textarea></textarea>
+        </div>
+        <div class="row">
+          <label>Select Voice</label>
+          <div class="outer">
+            <select></select>
+          </div>
+        </div>
+        <button>Convert To Speech</button>
+      </form>
+    </div>
+    <p class="heading">Speech to Text - For Haroun yaakoubi</p>
+    <div class="options">
+      <div class="language">
+        <p>Language</p>
+        <select name="input-language" id="language"></select>
+      </div>
+      <div class="youtube-link">
+        <p>YouTube Video Link</p>
+        <input type="text" id="youtubeInput" placeholder="Paste YouTube video link here" />
+        <button class="btn" id="youtubeConvertBtn">Convert</button>
+      </div>
+    </div>
+    <div class="line"></div>
+    <button class="btn record">
+      <div class="icon">
+        <ion-icon name="mic-outline"></ion-icon>
+        <img src="bars.svg" alt="" />
+      </div>
+      <p>Start Listening</p>
+    </button>
+    <p class="heading">Result :</p>
+    <div class="result" spellcheck="false" placeholder="Text will be shown here">
+      <p class="interim"></p>
+    </div>
+    <div class="buttons">
+      <button class="btn clear">
+        <ion-icon name="trash-outline"></ion-icon>
+        <p>Clear</p>
+      </button>
+      <button class="btn download" disabled>
+        <ion-icon name="cloud-download-outline"></ion-icon>
+        <p>Download</p>
+      </button>
+    </div>
+    <p>Developed By Youbie</p>
+  </div>
 
-    <!-- IONICONS -->
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-    ></script>
+  <!-- IONICONS -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-    <!-- LANGUAGES -->
-    <script src="languages.js"></script>
+  <!-- LANGUAGES -->
+  <script src="languages.js"></script>
 
-    <!-- SCRIPT -->
-    <script src="script.js"></script>
-    
-  </body>
+  <!-- SCRIPT -->
+  <script src="script.js"></script>
+
+  <!-- TEXT TO SPEECH SCRIPT -->
+  <script src="texttospeech.js"></script>
+</body>
 </html>
