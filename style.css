@@ -90,3 +90,15 @@ body {
     width: 100%;
   }
 }
+
+
+/* Screen Styles */
+.screen {
+  display: none;
+}
+
+.screen.active {
+  display: block;
+}
+
+
